@@ -1,0 +1,6 @@
+google_analytics_api_homepage:
+    path:     /analytic
+    defaults: { _controller: GoogleAnalyticsApiBundle:Default:index }
+google_analytics_api_callback:
+    path:     /callback
+    defaults: { _controller: GoogleAnalyticsApiBundle:Default:callback }

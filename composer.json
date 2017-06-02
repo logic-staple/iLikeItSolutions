@@ -1,0 +1,33 @@
+{
+  "name": "logic-staple/analytic-bundle",
+  "type": "symfony-bundle",
+  "description": "Google Analytics API v4 Symfony",
+  "keywords": ["symfony","google","analytics","api","v4"],
+  "license": "Private",
+  "authors": [
+    {
+      "name": "Gourav"
+    }
+  ],
+  "require": {
+  	"php": ">=5.5.9",
+    "google/apiclient": "^2.0",
+    "symfony/framework-bundle": ">=2.3",
+    "symfony/twig-bundle": ">=2.0",
+    "twig/twig": ">=1.6"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "5.5.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "LogicStaple\\AnalyticBundle\\": "./"
+    }
+  },
+  "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+  },
+  "minimum-stability": "dev"
+}

@@ -1,0 +1,227 @@
+{#
+   This is the base template used as the application layout which contains the
+   common elements and decorates all the other templates.
+   See https://symfony.com/doc/current/book/templating.html#template-inheritance-and-layouts
+#}
+<!DOCTYPE html>
+<html lang="en">
+<!-- <html lang="{{ app.request.locale }}"> -->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>{% block title %}Publishared - CMS Editorial{% endblock %}</title>
+
+        {#  Global stylesheets #}
+
+        {% block stylesheets %}
+            <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
+            <link rel="stylesheet" href="{{ asset('css/icons/icomoon/styles.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/core.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/components.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/colors.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/publishared.css') }}">
+            <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        {% endblock %}
+
+        {#  Global stylesheets #}
+
+    </head>
+
+    <body id="{% block body_id %}{% endblock %}">
+
+        {% block header %}
+
+            {#  Main navbar  #}
+            <div class="navbar navbar-inverse bg-indigo">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="index.html"><img src="{{ asset('images/logo_light.png') }}" alt=""></a>
+
+                    <ul class="nav navbar-nav pull-right visible-xs-block">
+                        <li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
+                    </ul>
+                </div>
+
+                <div class="navbar-collapse collapse" id="navbar-mobile">
+                    <p class="navbar-text"><span class="label bg-publishared">Portada actualizada a las 15:33</span></p>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown dropdown-user">
+                            <a class="dropdown-toggle" data-toggle="dropdown">
+                                <img src="{{ asset('images/placeholder.jpg') }}" alt="">
+                                <span>John Doe</span>
+                                <i class="caret"></i>
+                            </a>
+
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <li><a href="#"><i class="icon-user-plus"></i> Mi perfil</a></li>
+                                <li><a href="#"><i class="icon-cog5"></i> Configuración</a></li>
+                                <li><a href="#"><i class="icon-switch2"></i> Cerrar sesión</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <form class="navbar-form navbar-right">
+                        <div class="form-group has-feedback">
+                            <input type="search" class="form-control" placeholder="Buscar">
+                            <div class="form-control-feedback">
+                                <i class="icon-search4 text-size-base"></i>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            {#  /Main navbar  #}
+
+            {# Second navbar #}
+
+            <div class="navbar navbar-default" id="navbar-second">
+                <ul class="nav navbar-nav no-border visible-xs-block">
+                    <li><a class="text-center collapsed" data-toggle="collapse" data-target="#navbar-second-toggle"><i class="icon-menu7"></i></a></li>
+                </ul>
+
+                <div class="navbar-collapse collapse" id="navbar-second-toggle">
+                    <ul class="nav navbar-nav navbar-nav-material">
+                        <li class="active"><a href="index.html"><i class="icon-display4 position-left"></i> Dashboard</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="icon-magazine position-left"></i> Portadas <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu width-200">
+                                <li><a href="#"><i class="icon-check"></i> Activa</a></li>
+                                <li><a href="#"><i class="icon-history"></i> Historico</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="icon-newspaper position-left"></i> Contenido <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu width-200">
+                                <li><a href="#"><i class="icon-archive"></i> Secciones</a></li>
+                                <li><a href="#"><i class="icon-stack3"></i> Categorias</a></li>
+                                <li><a href="#"><i class="icon-file-text2"></i> Artículos</a></li>
+                                <li><a href="#"><i class="icon-history"></i> Cronologías</a></li>
+                                <li><a href="#"><i class="icon-grid6"></i> Cards</a></li>
+                                <li><a href="#"><i class="icon-price-tags2"></i> Tags</a></li>
+                                <li><a href="#"><i class="icon-checkbox-checked"></i> Encuestas</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="icon-images2 position-left"></i> Multimedia <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu width-200">
+                                <li><a href="#"><i class="icon-play"></i> Videos</a></li>
+                                <li><a href="#"><i class="icon-images3"></i> Imágenes</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="icon-shield2 position-left"></i> Seguridad <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu width-200">
+                                <li><a href="#"><i class="icon-user-lock"></i> Administradores</a></li>
+                                <li><a href="#"><i class="icon-user-tie"></i> Editores</a></li>
+                                <li><a href="#"><i class="icon-users2"></i> Autores externos</a></li>
+                                <li><a href="#"><i class="icon-users4"></i> Suscriptores</a></li>
+                                <li><a href="#"><i class="icon-star-empty3"></i> Patrocinadores</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="icon-coin-euro position-left"></i> Publicidad <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu width-200">
+                                <li><a href="#"><i class="icon-price-tag"></i> Tags</a></li>
+                                <li><a href="#"><i class="icon-grid5"></i> Bloques</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-nav-material navbar-right">
+                        <li><a>Viernes 19 de mayo de 2017</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="icon-cog3"></i>
+                                <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <li><a href="#"><i class="icon-user-lock"></i> Roles de sistema</a></li>
+                                <li><a href="#"><i class="icon-statistics"></i> Analiticas</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#"><i class="icon-gear"></i> Configuración</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+             {# /Second navbar #}
+
+        {% endblock %}
+
+        {#  Page container #}
+        <div class="page-container">
+            {% block main %}
+
+    
+            {% endblock %}
+        </div>
+        {# /page container #}
+
+        {% block footer %}
+            <footer>
+                <!-- Footer -->
+                <div class="footer text-muted">
+                    &copy; 2017. <a href="#">Publishared.com</a> by <a href="http://ilikeit.io" target="_blank">iLike IT Solutions</a>
+                </div>
+                <!-- /footer -->
+            </footer>
+        {% endblock %}
+
+        {% block javascripts %}
+            <!-- Core JS files -->
+
+            <script src="{{ asset('js/plugins/loaders/pace.min.js') }}"></script>
+            <script src="{{ asset('js/core/libraries/jquery.min.js') }}"></script>
+            <script src="{{ asset('js/core/libraries/bootstrap.min.js') }}"></script>
+            <script src="{{ asset('js/plugins/loaders/blockui.min.js') }}"></script>
+            <script src="{{ asset('js/plugins/ui/nicescroll.min.js') }}"></script>
+            <script src="{{ asset('js/plugins/ui/drilldown.js') }}"></script>
+
+            <!-- Core JS files -->
+
+            <!-- Theme JS files -->
+
+            <script src="{{ asset('js/plugins/forms/styling/switchery.min.js') }}"></script>
+            <script src="{{ asset('js/plugins/forms/styling/uniform.min.js') }}"></script>
+            <script src="{{ asset('js/plugins/forms/selects/bootstrap_multiselect.js') }}"></script>
+            <script src="{{ asset('js/plugins/ui/moment/moment.min.js') }}"></script>
+            <script src="{{ asset('js/plugins/pickers/daterangepicker.js') }}"></script>
+            <script src="{{ asset('js/plugins/pickers/anytime.min.js') }}"></script>
+            <script src="{{ asset('js/plugins/pickers/pickadate/picker.js') }}"></script>
+            <script src="{{ asset('js/plugins/pickers/pickadate/picker.date.js') }}"></script>
+            <script src="{{ asset('js/plugins/pickers/pickadate/picker.time.js') }}"></script>
+            <script src="{{ asset('js/plugins/pickers/pickadate/legacy.js') }}"></script>
+            <script src="{{ asset('js/plugins/visualization/echarts/echarts.js') }}"></script>
+            <script src="{{ asset('js/plugins/ui/fab.min.js') }}"></script>
+            <script src="{{ asset('js/plugins/https://www.google.com/jsapi') }}"></script>
+
+            <script src="{{ asset('js/core/app.js') }}"></script>
+            <script src="{{ asset('js/pages/dashboard.js') }}"></script>
+            <script src="{{ asset('js/pages/dashboard_charts.js') }}"></script>
+            <script src="{{ asset('js/plugins/ui/ripple.min.js') }}"></script>
+
+            <!-- /theme JS files -->
+
+        {% endblock %}
+
+        {# it's not mandatory to set the timezone in localizeddate(). This is done to
+           avoid errors when the 'intl' PHP extension is not available and the application
+           is forced to use the limited "intl polyfill", which only supports UTC and GMT #}
+    </body> 
+</html>

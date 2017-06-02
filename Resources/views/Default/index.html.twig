@@ -1,0 +1,489 @@
+{% extends 'AnalyticBundle::base.html.twig' %}
+{% block main %}
+
+	{# Page content #}
+        <div class="page-content">
+
+            {# Main content #}
+            <div class="content-wrapper">
+
+
+                {# Quick actions #}
+                <ul class="fab-menu fab-menu-fixed fab-menu-bottom-right" data-fab-toggle="hover" data-fab-state="closed">
+                    <li>
+                        <a class="fab-menu-btn btn bg-publishared btn-float btn-rounded btn-icon legitRipple">
+                            <i class="fab-icon-open icon-paragraph-justify3"></i>
+                            <i class="fab-icon-close icon-cross2"></i>
+                        </a>
+
+                        <ul class="fab-menu-inner">
+                            <li>
+                                <div data-fab-label="Nueva nota">
+                                    <a href="#" class="btn btn-default btn-rounded btn-icon btn-float legitRipple">
+                                        <i class="icon-pencil"></i>
+                                    </a>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div data-fab-label="Gestionar portada">
+                                    <a href="#" class="btn bg-danger btn-rounded btn-icon btn-float legitRipple">
+                                        <i class="icon-magazine"></i>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                {# Quick actions  #}
+
+                <div class="row">
+                    <div class="col-sm-6 col-md-3">
+                        <div class="panel panel-body">
+                            <div class="media no-margin">
+                                <div class="media-left media-middle">
+                                    <i class="icon-file-text2 icon-3x text-indigo-400"></i>
+                                </div>
+
+                                <div class="media-body text-right">
+                                    <h3 class="no-margin text-semibold">10.545</h3>
+                                    <span class="text-uppercase text-size-mini text-muted">posts</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-md-3">
+                        <div class="panel panel-body">
+                            <div class="media no-margin">
+                                <div class="media-left media-middle">
+                                    <i class="icon-users icon-3x text-danger"></i>
+                                </div>
+
+                                <div class="media-body text-right">
+                                    <h3 class="no-margin text-semibold">2450</h3>
+                                    <span class="text-uppercase text-size-mini text-muted">suscriptores</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-md-3">
+                        <div class="panel panel-body">
+                            <div class="media no-margin">
+                                <div class="media-body">
+                                    <h3 class="no-margin text-semibold">23</h3>
+                                    <span class="text-uppercase text-size-mini text-muted">Editores</span>
+                                </div>
+
+                                <div class="media-right media-middle">
+                                    <i class="icon-user-check icon-3x text-blue-400"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-md-3">
+                        <div class="panel panel-body">
+                            <div class="media no-margin">
+                                <div class="media-body">
+                                    <h3 class="no-margin text-semibold">23</h3>
+                                    <span class="text-uppercase text-size-mini text-muted">widgets</span>
+                                </div>
+
+                                <div class="media-right media-middle">
+                                    <i class="icon-embed2 icon-3x text-danger-400"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-20">
+                    <div class="col-md-12 text-right">
+                        <button type="button" class="btn btn-default analytics-daterange">
+                            <i class="icon-calendar22 position-left"></i>
+                            <span></span>
+                            <b class="caret"></b>
+                        </button>
+                    </div>
+                </div>
+
+                {# Main charts #}
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="panel panel-body bg-publishared has-bg-image">
+                                    <div class="media no-margin">
+                                        <div class="media-body">
+                                            <h1 class="no-margin">2.445</h1>
+                                            <span class="text-uppercase text-size-mini">usuarios activos  avg {{ data.avg_time_on_page }}   load {{ data.avg_page_load_time }}</span><br>
+                                        </div>
+                                        <div class="media-right media-middle">
+                                            <i class="icon-users4 icon-2x"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="panel panel-body">
+                                    <div class="media no-margin">
+                                        <div class="media-body">
+                                            <h3 class="no-margin text-semibold">{{ data.sessions }}</h3>
+                                            <span class="text-uppercase text-size-mini text-muted">Sessions</span>
+                                        </div>
+                                        <div class="media-right media-middle">
+                                            <i class="icon-statistics icon-1x text-warning"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-body">
+                                    <div class="media no-margin">
+                                        <div class="media-body">
+                                            <h3 class="no-margin text-semibold">{{ data.percent_new_visits }}</h3>
+                                            <span class="text-uppercase text-size-mini text-muted">% New Sessions</span>
+                                        </div>
+                                        <div class="media-right media-middle">
+                                            <i class="icon-users2 icon-1x text-danger"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-body">
+                                    <div class="media no-margin">
+                                        <div class="media-body">
+                                            <h3 class="no-margin text-semibold">{{ data.page_views }}</h3>
+                                            <span class="text-uppercase text-size-mini text-muted">páginas vistas</span>
+                                        </div>
+                                        <div class="media-right media-middle">
+                                            <i class="icon-file-eye icon-1x text-indigo-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="panel panel-body">
+                                    <div class="media no-margin">
+                                        <div class="media-body">
+                                            <h3 class="no-margin text-semibold">00:07:31</h3>
+                                            <span class="text-uppercase text-size-mini text-muted">duración media</span>
+                                        </div>
+                                        <div class="media-right media-middle">
+                                            <i class="icon-watch icon-1x text-warning"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-body">
+                                    <div class="media no-margin">
+                                        <div class="media-body">
+                                            <h3 class="no-margin text-semibold">{{ data.bounce_rate }}</h3>
+                                            <span class="text-uppercase text-size-mini text-muted">% rebote</span>
+                                        </div>
+                                        <div class="media-right media-middle">
+                                            <i class="icon-alignment-aligned-to icon-1x text-danger-700"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-body">
+                                    <div class="media no-margin">
+                                        <div class="media-body">
+                                            <h3 class="no-margin text-semibold">{{ data.page_view_per_session}}</h3>
+                                            <span class="text-uppercase text-size-mini text-muted">Pages / Session</span>
+                                        </div>
+                                        <div class="media-right media-middle">
+                                            <i class="icon-alignment-aligned-to icon-1x text-danger-700"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-8">
+                        <div class="panel panel-flat">
+                            <div class="chart-container p-20">
+                                <div class="chart has-fixed-height" id="visit_lines"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="panel panel-flat">
+                            <div class="panel-heading">
+                                <h5 class="panel-title"><i class="icon-stats-growth2 position-left"></i> Fuentes de tráfico</h5>
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table text-nowrap">
+                                        <thead>
+                                        <tr>
+                                            <th>Fuente</th>
+                                            <th width="120">Tráfico</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="media-heading">
+                                                    <a href="#" class="letter-icon-title">okdiario.com</a>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <h6 class="text-semibold no-margin">1.518.999</h6>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="media-heading">
+                                                    <a href="#" class="letter-icon-title">periodistadigital.com</a>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <h6 class="text-semibold no-margin">518.999</h6>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="media-heading">
+                                                    <a href="#" class="letter-icon-title">diariodeavisos.elespanol.com</a>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <h6 class="text-semibold no-margin">318.999</h6>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="media-heading">
+                                                    <a href="#" class="letter-icon-title">descifrado.com</a>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <h6 class="text-semibold no-margin">218.999</h6>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="media-heading">
+                                                    <a href="#" class="letter-icon-title">miamidiario.com</a>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <h6 class="text-semibold no-margin">118.999</h6>
+                                            </td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-flat">
+                            <div class="panel-heading">
+                                <h5 class="panel-title"><i class="icon-earth position-left"></i> Ubicaciones de tráfico</h5>
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table text-nowrap">
+                                        <thead>
+                                        <tr>
+                                            <th>País</th>
+                                            <th width="120">Tráfico</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="media-heading">
+                                                    España
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <h6 class="text-semibold no-margin">1.518.999</h6>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="media-heading">
+                                                    Venezuela
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <h6 class="text-semibold no-margin">518.999</h6>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="media-heading">
+                                                    Estados Unidos
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <h6 class="text-semibold no-margin">318.999</h6>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="media-heading">
+                                                    Francia
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <h6 class="text-semibold no-margin">218.999</h6>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="media-heading">
+                                                    Mexico
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <h6 class="text-semibold no-margin">118.999</h6>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="media-heading">
+                                                    Panama
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <h6 class="text-semibold no-margin">118.999</h6>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="media-heading">
+                                                    Ecuador
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <h6 class="text-semibold no-margin">118.999</h6>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="media-heading">
+                                                    United Kingdom
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <h6 class="text-semibold no-margin">118.999</h6>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="panel panel-flat">
+                            <div class="panel-heading">
+                                <h5 class="panel-title"><i class="icon-file-text2 position-left"></i> Páginas más vistas</h5>
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table text-nowrap">
+                                        <thead>
+                                        <tr>
+                                            <th>Página</th>
+                                            <th width="120">Visitas</th>
+                                            <th width="80">%</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="media-heading">
+                                                    <a href="#" class="letter-icon-title">/widgets/onehpepw01/57ac9a7bc89fd</a>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <h6 class="text-semibold no-margin">1.488</h6>
+                                            </td>
+                                            <td>
+                                                <h6 class="text-semibold no-margin">72%</h6>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="media-heading">
+                                                    <a href="#" class="letter-icon-title">/ninos-en-situacion-de-ca...chas-para-pedir-alimentos</a>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <h6 class="text-semibold no-margin">223</h6>
+                                            </td>
+                                            <td>
+                                                <h6 class="text-semibold no-margin">14%</h6>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="media-heading">
+                                                    <a href="#" class="letter-icon-title">/ninos-en-situacion-de-ca...chas-para-pedir-alimentos</a>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <h6 class="text-semibold no-margin">223</h6>
+                                            </td>
+                                            <td>
+                                                <h6 class="text-semibold no-margin">14%</h6>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="media-heading">
+                                                    <a href="#" class="letter-icon-title">/ninos-en-situacion-de-ca...chas-para-pedir-alimentos</a>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <h6 class="text-semibold no-margin">223</h6>
+                                            </td>
+                                            <td>
+                                                <h6 class="text-semibold no-margin">14%</h6>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="media-heading">
+                                                    <a href="#" class="letter-icon-title">/ninos-en-situacion-de-ca...chas-para-pedir-alimentos</a>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <h6 class="text-semibold no-margin">223</h6>
+                                            </td>
+                                            <td>
+                                                <h6 class="text-semibold no-margin">14%</h6>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-flat">
+                            <div class="panel-body">
+                                <div class="chart-container text-center has-scroll">
+                                    <div class="display-inline-block" id="google-geo-region"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            {# /main content  #}
+
+        </div>
+    {# /page content  #}
+
+{% endblock %}
