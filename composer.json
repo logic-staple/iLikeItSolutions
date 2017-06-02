@@ -1,5 +1,5 @@
 {
-  "name": "logic-staple/analytic-bundle",
+  "name": "iLikeItSolutions/google-analytics-api",
   "type": "symfony-bundle",
   "description": "Google Analytics API v4 Symfony",
   "keywords": ["symfony","google","analytics","api","v4"],
@@ -10,7 +10,7 @@
     }
   ],
   "require": {
-  	"php": ">=5.5.9",
+    "php": ">=5.5.9",
     "google/apiclient": "^2.0",
     "symfony/framework-bundle": ">=2.3",
     "symfony/twig-bundle": ">=2.0",
@@ -21,7 +21,7 @@
   },
   "autoload": {
     "psr-4": {
-      "LogicStaple\\AnalyticBundle\\": "./"
+      "iLikeItSolutions\\GoogleAnalyticsApi\\": "./"
     }
   },
   "extra": {
