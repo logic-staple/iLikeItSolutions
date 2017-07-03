@@ -4,3 +4,6 @@ google_analytics_api_homepage:
 google_analytics_api_callback:
     path:     /callback
     defaults: { _controller: GoogleAnalyticsApiBundle:Default:callback }
+google_analytics_api_upload:
+    path:     /upload
+    defaults: { _controller: GoogleAnalyticsApiBundle:Default:upload }

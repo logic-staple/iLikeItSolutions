@@ -108,7 +108,8 @@
                         </button>
                     </div>
                 </div>
-
+                <form id="dashboardFilterDate">
+                </form>
                 {# Main charts #}
                 <div class="row">
                     <div class="col-md-4">
@@ -225,57 +226,21 @@
                                         </tr>
                                         </thead>
                                         <tbody>
+                                        {% for traffic in data.trafficSourcesData %}
+
                                         <tr>
                                             <td>
                                                 <div class="media-heading">
-                                                    <a href="#" class="letter-icon-title">okdiario.com</a>
+                                                    <a href="#" class="letter-icon-title">{{ traffic.source|e }}</a>
                                                 </div>
                                             </td>
                                             <td>
-                                                <h6 class="text-semibold no-margin">1.518.999</h6>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="media-heading">
-                                                    <a href="#" class="letter-icon-title">periodistadigital.com</a>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <h6 class="text-semibold no-margin">518.999</h6>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="media-heading">
-                                                    <a href="#" class="letter-icon-title">diariodeavisos.elespanol.com</a>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <h6 class="text-semibold no-margin">318.999</h6>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="media-heading">
-                                                    <a href="#" class="letter-icon-title">descifrado.com</a>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <h6 class="text-semibold no-margin">218.999</h6>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="media-heading">
-                                                    <a href="#" class="letter-icon-title">miamidiario.com</a>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <h6 class="text-semibold no-margin">118.999</h6>
+                                                <h6 class="text-semibold no-margin">{{ traffic.value|e }}</h6>
                                             </td>
                                         </tr>
 
+                                        {% endfor %}
+                                        
                                         </tbody>
                                     </table>
                                 </div>

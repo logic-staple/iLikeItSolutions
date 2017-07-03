@@ -1,3 +1,6 @@
+parameters:
+    #parameter_name: value
+    ga_view_id: "106341934" # Enter here View ID of Google analytics account
 services:
     google_analytics_api.api:
         class: iLikeItSolutions\GoogleAnalyticsApiBundle\Service\GoogleAnalyticsService
