@@ -1,5 +1,5 @@
 {
-  "name": "iLikeItSolutions/GoogleAnalyticsApiBundle",
+  "name": "i-like-it-solutions/google-analytics-api",
   "type": "symfony-bundle",
   "description": "Google Analytics API v4 Symfony",
   "keywords": ["symfony","google","analytics","api","v4"],
