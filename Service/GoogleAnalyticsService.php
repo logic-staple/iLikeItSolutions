@@ -335,10 +335,18 @@ class GoogleAnalyticsService {
 
         $result = $report->getReports()[0]->getData()->getRows();
         $finalResult = array();
+        $weekDay = array(   0 => 'Sunday',
+                            1 => 'Monday',
+                            2 => 'Tuesday',
+                            3 => 'Wednesday',
+                            4 => 'Thursday',
+                            5 => 'Friday',
+                            6 => 'Saturday'
+                        );
         if(!empty($result)){
             foreach ($result as $key => $value) {
-                $finalResult['sessions'][] = $value['metrics'][0]['values'][0];
-                $finalResult['pageviews'][] = $value['metrics'][0]['values'][1];
+                $day = $weekDay[$value['dimensions'][0]];
+                $finalResult[] = array($day, (int)$value['metrics'][0]['values'][0], (int)$value['metrics'][0]['values'][1]);
             }
         }
         return $finalResult;

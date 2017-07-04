@@ -210,7 +210,7 @@
                     <div class="col-lg-8">
                         <div class="panel panel-flat">
                             <div class="chart-container p-20">
-                                <div class="chart has-fixed-height" id="page_visit_lines"></div>
+                                <div class="chart has-fixed-height" id="curve_chart"></div>
                             </div>
                         </div>
                     </div>
@@ -355,6 +355,33 @@
 {{ parent() }}
 <script type="text/javascript" src="http://www.google.com/jsapi"></script>
 <script>
+//Line chart
+google.load("visualization", "1", {packages:["corechart"]});
+google.setOnLoadCallback(drawChart);
+var dataWeekly = {{ data.pagesSessionsData|json_encode|raw }};
+function drawChart() {
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'Day');
+    data.addColumn('number', 'Sesiones');
+    data.addColumn('number', 'Páginas vistas');
+    
+    for(var i = 0; i < dataWeekly.length; i++){
+        data.addRows([[dataWeekly[i][0],parseInt(dataWeekly[i][1]),parseInt(dataWeekly[i][2])]]);
+    }
+
+
+    var options = {
+      curveType: 'function',
+      width: '100%',
+      legend: { position: 'top' }
+    };
+
+    var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+    chart.draw(data, options);
+}
+
+
 // Initialize geo chart
 google.load("visualization", "1", {packages:["geochart"]});
 google.setOnLoadCallback(drawRegionsMap);
@@ -437,115 +464,6 @@ $(function() {
             $("#dashboardFilterDate").append(DofS + DofE);
             $("#dashboardFilterDate").submit();
         });
-
-
-    /* LINE GRAPH */
-    // Set paths
-    // ------------------------------
-    var pageSession = {{ data.pagesSessionsData.sessions|json_encode|raw }};
-    var pageViews = {{ data.pagesSessionsData.pageviews|json_encode|raw }};
-
-    require.config({
-        paths: {
-            echarts: '/js/plugins/visualization/echarts'
-        }
-    });
-
-
-    // Configuration
-    // ------------------------------
-
-    require(
-        [
-            'echarts',
-            'echarts/theme/limitless',
-            'echarts/chart/line',
-            'echarts/chart/bar'
-        ],
-
-        // Charts setup
-        function (ec, limitless) {
-            // Initialize charts
-            // ------------------------------
-            var visit_lines = ec.init(document.getElementById('page_visit_lines'), limitless);
-
-            // Charts setup
-            // ------------------------------
-
-            //
-            // Stacked lines options
-            //
-            visit_lines_options = {
-
-                // Setup grid
-                grid: {
-                    x: 40,
-                    x2:20,
-                    y: 35,
-                    y2: 25
-                },
-
-                // Add tooltip
-                tooltip: {
-                    trigger: 'axis'
-                },
-
-                // Add legend
-                legend: {
-                    data: ['Páginas vistas', 'Sesiones']
-                },
-
-                // Add custom colors
-                color: ['#3b7abe', '#66BB6A'],
-
-                // Enable drag recalculate
-                calculable: true,
-
-                // Hirozontal axis
-                xAxis: [{
-                    type: 'category',
-                    boundaryGap: false,
-                    data: [
-                        'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' 
-                    ]
-                }],
-
-                // Vertical axis
-                yAxis: [{
-                    type: 'value'
-                }],
-
-                // Add series
-                series: [
-                    {
-                        name: 'Páginas vistas',
-                        type: 'line',
-                        stack: 'Total',
-                        data: pageViews
-                    },
-                    {
-                        name: 'Sesiones',
-                        type: 'line',
-                        stack: 'Total',
-                        data: pageSession
-                    }
-                ]
-            };
-
-
-            // ------------------------------
-            visit_lines.setOption(visit_lines_options);
-
-            // Resize charts
-            // ------------------------------
-
-            window.onresize = function () {
-                setTimeout(function () {
-                    visit_lines.resize();
-                }, 200);
-            }
-        }
-    );
 
 });
 
