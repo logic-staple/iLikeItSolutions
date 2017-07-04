@@ -1,0 +1,32 @@
+.bg-indigo {
+    background-color: #444;
+    border-color: #444;
+    color: #fff;
+}
+
+.bg-publishared {
+    background-color: #3b7abe;
+    border-color: #3b7abe;
+    color: #fff;
+}
+
+.navbar-brand > img {
+    margin-top: 0;
+    height: 26px;
+}
+
+.navbar-nav{
+    text-transform: none;
+    font-weight: 100;
+    color: #111;
+}
+
+.navbar-default .navbar-nav > li > a,
+.dropdown-menu > li > a,
+.navbar-right input
+{
+    font-weight: 300;
+    color: #111;
+    text-transform: none;
+    font-size: 12px;
+}

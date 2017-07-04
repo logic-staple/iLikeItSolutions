@@ -41,7 +41,7 @@ class DefaultController extends Controller
 
         /* Check first Client Json file exist */
         if($isClientFileExist == 0 || empty($viewId)){
-        	return $this->render('AnalyticBundle:Default:index.html.twig', array(
+        	return $this->render('GoogleAnalyticsApiBundle:Default:index.html.twig', array(
         			'isClientFileExist' => $isClientFileExist,
         			'viewId' => $viewId
         		));
@@ -143,7 +143,7 @@ class DefaultController extends Controller
 	    	/* Get last week all days sessions/pagevisits line graph data */
 	        $pagesSessionsData = $analyticsService->getPagesSessionWeekly($viewId,$lastWeekStart,$lastWeekEnd);
 	
-	        return $this->render('AnalyticBundle:Default:index.html.twig', array(
+	        return $this->render('GoogleAnalyticsApiBundle:Default:index.html.twig', array(
 	            'analytics'     =>  $analytics,
 	            'client'        =>  $client,
 	            'report'        =>  $report,

@@ -1,13 +1,18 @@
-{% extends 'AnalyticBundle::base.html.twig' %}
+{% extends 'GoogleAnalyticsApiBundle::base.html.twig' %}
 {% block main %}
 
-	{# Page content #}
+    {# Page content #}
         <div class="page-content">
 
             {# Main content #}
             <div class="content-wrapper">
 
-
+                {% if isClientFileExist == 0 %}
+                    <h2 style="color:red;"> Client JSON file does not exist. Please check file with name <i><b>client_secrets.json</b></i> at location <i><b>/iLikeItSolutions/Data/</b></i> </h2>
+                {% else %}
+                {% if viewId == "" %}
+                    <h2  style="color:red;"> Please enter view id of account from GA dashbord at file path <i><b>/iLikeItSolutions/GoogleAnalyticsApiBundle/Resources/config/services.yml</b></i> in property variable <b>ga_view_id</b></h2>
+                {% else %}
                 {# Quick actions #}
                 <ul class="fab-menu fab-menu-fixed fab-menu-bottom-right" data-fab-toggle="hover" data-fab-state="closed">
                     <li>
@@ -108,8 +113,9 @@
                         </button>
                     </div>
                 </div>
-                <form id="dashboardFilterDate">
+                <form id="dashboardFilterDate" action="" type="GET">
                 </form>
+
                 {# Main charts #}
                 <div class="row">
                     <div class="col-md-4">
@@ -131,7 +137,7 @@
                                 <div class="panel panel-body">
                                     <div class="media no-margin">
                                         <div class="media-body">
-                                            <h3 class="no-margin text-semibold">{{ data.sessions }}</h3>
+                                            <h3 class="no-margin text-semibold">{{ data.sessions| number_format(0, '.', '.') }}</h3>
                                             <span class="text-uppercase text-size-mini text-muted">Sessions</span>
                                         </div>
                                         <div class="media-right media-middle">
@@ -142,7 +148,7 @@
                                 <div class="panel panel-body">
                                     <div class="media no-margin">
                                         <div class="media-body">
-                                            <h3 class="no-margin text-semibold">{{ data.percent_new_visits }}</h3>
+                                            <h3 class="no-margin text-semibold">{{ data.percent_new_visits| round(2, 'floor') }}</h3>
                                             <span class="text-uppercase text-size-mini text-muted">% New Sessions</span>
                                         </div>
                                         <div class="media-right media-middle">
@@ -153,7 +159,7 @@
                                 <div class="panel panel-body">
                                     <div class="media no-margin">
                                         <div class="media-body">
-                                            <h3 class="no-margin text-semibold">{{ data.page_views }}</h3>
+                                            <h3 class="no-margin text-semibold">{{ data.page_views| number_format(0, '.', '.') }}</h3>
                                             <span class="text-uppercase text-size-mini text-muted">páginas vistas</span>
                                         </div>
                                         <div class="media-right media-middle">
@@ -177,7 +183,7 @@
                                 <div class="panel panel-body">
                                     <div class="media no-margin">
                                         <div class="media-body">
-                                            <h3 class="no-margin text-semibold">{{ data.bounce_rate }}</h3>
+                                            <h3 class="no-margin text-semibold">{{ data.bounce_rate| round(2, 'floor') }}</h3>
                                             <span class="text-uppercase text-size-mini text-muted">% rebote</span>
                                         </div>
                                         <div class="media-right media-middle">
@@ -188,7 +194,7 @@
                                 <div class="panel panel-body">
                                     <div class="media no-margin">
                                         <div class="media-body">
-                                            <h3 class="no-margin text-semibold">{{ data.page_view_per_session}}</h3>
+                                            <h3 class="no-margin text-semibold">{{ data.page_view_per_session| round(2, 'floor')}}</h3>
                                             <span class="text-uppercase text-size-mini text-muted">Pages / Session</span>
                                         </div>
                                         <div class="media-right media-middle">
@@ -204,7 +210,7 @@
                     <div class="col-lg-8">
                         <div class="panel panel-flat">
                             <div class="chart-container p-20">
-                                <div class="chart has-fixed-height" id="visit_lines"></div>
+                                <div class="chart has-fixed-height" id="page_visit_lines"></div>
                             </div>
                         </div>
                     </div>
@@ -235,12 +241,13 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <h6 class="text-semibold no-margin">{{ traffic.value|e }}</h6>
+                                                <h6 class="text-semibold no-margin">{{ traffic.value|number_format(0, '.', '.') }}</h6>
                                             </td>
                                         </tr>
 
                                         {% endfor %}
                                         
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -261,86 +268,20 @@
                                         </tr>
                                         </thead>
                                         <tbody>
+                                        {% for traffic in data.trafficLocationData %}
+
                                         <tr>
                                             <td>
                                                 <div class="media-heading">
-                                                    España
+                                                    {{ traffic.source|e }}
                                                 </div>
                                             </td>
                                             <td>
-                                                <h6 class="text-semibold no-margin">1.518.999</h6>
+                                                <h6 class="text-semibold no-margin">{{ traffic.value|number_format(0, '.', '.') }}</h6>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="media-heading">
-                                                    Venezuela
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <h6 class="text-semibold no-margin">518.999</h6>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="media-heading">
-                                                    Estados Unidos
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <h6 class="text-semibold no-margin">318.999</h6>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="media-heading">
-                                                    Francia
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <h6 class="text-semibold no-margin">218.999</h6>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="media-heading">
-                                                    Mexico
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <h6 class="text-semibold no-margin">118.999</h6>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="media-heading">
-                                                    Panama
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <h6 class="text-semibold no-margin">118.999</h6>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="media-heading">
-                                                    Ecuador
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <h6 class="text-semibold no-margin">118.999</h6>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="media-heading">
-                                                    United Kingdom
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <h6 class="text-semibold no-margin">118.999</h6>
-                                            </td>
-                                        </tr>
+
+                                        {% endfor %}
                                         </tbody>
                                     </table>
                                 </div>
@@ -363,77 +304,29 @@
                                         </tr>
                                         </thead>
                                         <tbody>
+                                        {% for page in data.pagesVisitData %}
                                         <tr>
                                             <td>
                                                 <div class="media-heading">
-                                                    <a href="#" class="letter-icon-title">/widgets/onehpepw01/57ac9a7bc89fd</a>
+                                                    <a href="#" class="letter-icon-title">{{ page.path|e }}</a>
                                                 </div>
                                             </td>
                                             <td>
-                                                <h6 class="text-semibold no-margin">1.488</h6>
+                                                <h6 class="text-semibold no-margin">{{ page.pageviews|number_format(0, '.', '.') }}</h6>
                                             </td>
                                             <td>
-                                                <h6 class="text-semibold no-margin">72%</h6>
+                                                <h6 class="text-semibold no-margin">{{ 
+                                                ((page.pageviews/data.page_views)*100) | round(2, 'floor') }}%</h6>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="media-heading">
-                                                    <a href="#" class="letter-icon-title">/ninos-en-situacion-de-ca...chas-para-pedir-alimentos</a>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <h6 class="text-semibold no-margin">223</h6>
-                                            </td>
-                                            <td>
-                                                <h6 class="text-semibold no-margin">14%</h6>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="media-heading">
-                                                    <a href="#" class="letter-icon-title">/ninos-en-situacion-de-ca...chas-para-pedir-alimentos</a>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <h6 class="text-semibold no-margin">223</h6>
-                                            </td>
-                                            <td>
-                                                <h6 class="text-semibold no-margin">14%</h6>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="media-heading">
-                                                    <a href="#" class="letter-icon-title">/ninos-en-situacion-de-ca...chas-para-pedir-alimentos</a>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <h6 class="text-semibold no-margin">223</h6>
-                                            </td>
-                                            <td>
-                                                <h6 class="text-semibold no-margin">14%</h6>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="media-heading">
-                                                    <a href="#" class="letter-icon-title">/ninos-en-situacion-de-ca...chas-para-pedir-alimentos</a>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <h6 class="text-semibold no-margin">223</h6>
-                                            </td>
-                                            <td>
-                                                <h6 class="text-semibold no-margin">14%</h6>
-                                            </td>
-                                        </tr>
+                                        
+                                        {% endfor %}
+                                        
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>
-
                         <div class="panel panel-flat">
                             <div class="panel-body">
                                 <div class="chart-container text-center has-scroll">
@@ -444,11 +337,219 @@
                     </div>
 
                 </div>
-
+                {% endif %}
+                {% endif %}
             </div>
             {# /main content  #}
 
         </div>
     {# /page content  #}
+{% endblock %}
 
+
+
+{% block javascripts %}
+
+{% if isClientFileExist == 1 %}
+{% if viewId != "" %}
+{{ parent() }}
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script>
+// Initialize geo chart
+google.load("visualization", "1", {packages:["geochart"]});
+google.setOnLoadCallback(drawRegionsMap);
+var geoData = {{ data.geoLocationData|json_encode|raw }};
+
+// Chart settings
+function drawRegionsMap() {
+
+    // Data
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'Country');
+    data.addColumn('number', 'Sessions');
+    
+    for(var i = 0; i < geoData.length; i++){
+        data.addRows([[geoData[i][0],parseInt(geoData[i][1])]]);
+    }
+    // Options
+    var options = {
+        fontName: 'Roboto',
+        color: '#3b7abe',
+        colorAxis: {colors: ['#bfd4ea', '#6a94c1', '#3b7abe']},
+        height: 500,
+        width: "100%",
+        fontSize: 12,
+        tooltip: {
+            textStyle: {
+                fontName: 'Roboto',
+                fontSize: 13
+            }
+        }
+    };
+
+    // Draw chart
+    var chart = new google.visualization.GeoChart($('#google-geo-region')[0]);
+    chart.draw(data, options);
+}
+
+$(function() {
+    var st = '{{ beginDate | date("Y-m-d H:i:s")}}';
+    var end = '{{ endDate | date("Y-m-d H:i:s")}}';
+    var startD = moment(st);
+    var endD = moment(end);
+    // Initialize with options
+    var menu = $('.analytics-daterange').daterangepicker(
+        {
+            startDate: startD,
+            endDate: endD,
+            minDate: '01/01/2014',
+            maxDate: moment(),
+            dateLimit: { days: 60 },
+            ranges: {
+                'Today': [moment(), moment()],
+                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                'Últimos 7 dias': [moment().subtract(6, 'days'), moment()],
+                'Este mes': [moment().startOf('month'), moment().endOf('month')],
+                'Mes pasado': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            },
+            opens: 'left',
+            applyClass: 'btn-small bg-slate',
+            cancelClass: 'btn-small btn-default'
+        },
+        function(start, end) {
+            $('.analytics-daterange span').html(start.format('MMMM D, YYYY') + ' &nbsp; - &nbsp; ' + end.format('MMMM D, YYYY'));
+        }
+    );
+
+    // Display date format
+    $('.analytics-daterange span').html(startD.format('MMMM D, YYYY') + ' &nbsp; - &nbsp; ' + endD.format('MMMM D, YYYY'));
+
+    $('input[name="datefilter"]').on('apply.daterangepicker', function(ev, picker) {
+
+            alert(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+    });
+
+    $('.analytics-daterange').on('apply.daterangepicker', function (ev, picker) {
+            var start_dt = $(document).find('input[name="daterangepicker_start"]').val();
+            var end_dt = $(document).find('input[name="daterangepicker_end"]').val();
+            var DofS = "<input name='beginDate' type='hidden'  value='" + start_dt + "'/>";
+            var DofE = "<input name='endDate' type='hidden' value='" + end_dt + "'/>";
+            $("#dashboardFilterDate").append(DofS + DofE);
+            $("#dashboardFilterDate").submit();
+        });
+
+
+    /* LINE GRAPH */
+    // Set paths
+    // ------------------------------
+    var pageSession = {{ data.pagesSessionsData.sessions|json_encode|raw }};
+    var pageViews = {{ data.pagesSessionsData.pageviews|json_encode|raw }};
+
+    require.config({
+        paths: {
+            echarts: '/js/plugins/visualization/echarts'
+        }
+    });
+
+
+    // Configuration
+    // ------------------------------
+
+    require(
+        [
+            'echarts',
+            'echarts/theme/limitless',
+            'echarts/chart/line',
+            'echarts/chart/bar'
+        ],
+
+        // Charts setup
+        function (ec, limitless) {
+            // Initialize charts
+            // ------------------------------
+            var visit_lines = ec.init(document.getElementById('page_visit_lines'), limitless);
+
+            // Charts setup
+            // ------------------------------
+
+            //
+            // Stacked lines options
+            //
+            visit_lines_options = {
+
+                // Setup grid
+                grid: {
+                    x: 40,
+                    x2:20,
+                    y: 35,
+                    y2: 25
+                },
+
+                // Add tooltip
+                tooltip: {
+                    trigger: 'axis'
+                },
+
+                // Add legend
+                legend: {
+                    data: ['Páginas vistas', 'Sesiones']
+                },
+
+                // Add custom colors
+                color: ['#3b7abe', '#66BB6A'],
+
+                // Enable drag recalculate
+                calculable: true,
+
+                // Hirozontal axis
+                xAxis: [{
+                    type: 'category',
+                    boundaryGap: false,
+                    data: [
+                        'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' 
+                    ]
+                }],
+
+                // Vertical axis
+                yAxis: [{
+                    type: 'value'
+                }],
+
+                // Add series
+                series: [
+                    {
+                        name: 'Páginas vistas',
+                        type: 'line',
+                        stack: 'Total',
+                        data: pageViews
+                    },
+                    {
+                        name: 'Sesiones',
+                        type: 'line',
+                        stack: 'Total',
+                        data: pageSession
+                    }
+                ]
+            };
+
+
+            // ------------------------------
+            visit_lines.setOption(visit_lines_options);
+
+            // Resize charts
+            // ------------------------------
+
+            window.onresize = function () {
+                setTimeout(function () {
+                    visit_lines.resize();
+                }, 200);
+            }
+        }
+    );
+
+});
+
+</script>
+{% endif %}
+{% endif %}
 {% endblock %}

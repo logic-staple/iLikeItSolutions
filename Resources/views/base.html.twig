@@ -14,17 +14,61 @@
         {#  Global stylesheets #}
 
         {% block stylesheets %}
+        {% stylesheets 
+            '@GoogleAnalyticsApiBundle/Resources/public/css/*' filter='cssrewrite' 
+            '@GoogleAnalyticsApiBundle/Resources/public/css/icons/icomoon/styles.css'
+        %}
+            <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
             <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
-            <link rel="stylesheet" href="{{ asset('css/icons/icomoon/styles.css') }}">
-            <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
-            <link rel="stylesheet" href="{{ asset('css/core.css') }}">
-            <link rel="stylesheet" href="{{ asset('css/components.css') }}">
-            <link rel="stylesheet" href="{{ asset('css/colors.css') }}">
-            <link rel="stylesheet" href="{{ asset('css/publishared.css') }}">
             <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        
         {% endblock %}
 
         {#  Global stylesheets #}
+
+           {% block javascripts %}
+            {% javascripts 
+
+
+                '@GoogleAnalyticsApiBundle/Resources/public/js/plugins/loaders/pace.min.js'
+                '@GoogleAnalyticsApiBundle/Resources/public/js/core/libraries/jquery.min.js'
+                '@GoogleAnalyticsApiBundle/Resources/public/js/core/libraries/bootstrap.min.js'
+                '@GoogleAnalyticsApiBundle/Resources/public/js/plugins/loaders/blockui.min.js'
+                '@GoogleAnalyticsApiBundle/Resources/public/js/plugins/ui/nicescroll.min.js'
+                '@GoogleAnalyticsApiBundle/Resources/public/js/plugins/ui/drilldown.js'
+
+
+
+                '@GoogleAnalyticsApiBundle/Resources/public/js/plugins/forms/styling/switchery.min.js'
+                '@GoogleAnalyticsApiBundle/Resources/public/js/plugins/forms/styling/uniform.min.js'
+                '@GoogleAnalyticsApiBundle/Resources/public/js/plugins/forms/selects/bootstrap_multiselect.js'
+                '@GoogleAnalyticsApiBundle/Resources/public/js/plugins/ui/moment/moment.min.js'
+                '@GoogleAnalyticsApiBundle/Resources/public/js/plugins/pickers/daterangepicker.js'
+                '@GoogleAnalyticsApiBundle/Resources/public/js/plugins/pickers/anytime.min.js'
+                '@GoogleAnalyticsApiBundle/Resources/public/js/plugins/pickers/pickadate/picker.js'
+                '@GoogleAnalyticsApiBundle/Resources/public/js/plugins/pickers/pickadate/picker.date.js'
+                '@GoogleAnalyticsApiBundle/Resources/public/js/plugins/pickers/pickadate/legacy.js'
+                '@GoogleAnalyticsApiBundle/Resources/public/js/plugins/visualization/echarts/echarts.js'
+                '@GoogleAnalyticsApiBundle/Resources/public/js/plugins/pickers/pickadate/picker.time.js'
+                '@GoogleAnalyticsApiBundle/Resources/public/js/plugins/ui/fab.min.js'
+
+                '@GoogleAnalyticsApiBundle/Resources/public/js/core/app.js'
+                '@GoogleAnalyticsApiBundle/Resources/public/js/pages/dashboard.js'
+                '@GoogleAnalyticsApiBundle/Resources/public/js/pages/dashboard_charts.js'
+                '@GoogleAnalyticsApiBundle/Resources/public/js/plugins/ui/ripple.min.js'
+
+                '@GoogleAnalyticsApiBundle/Resources/public/js/plugins/visualization/echarts/theme/limitless.js'
+                '@GoogleAnalyticsApiBundle/Resources/public/js/plugins/visualization/echarts/chart/line.js'
+                '@GoogleAnalyticsApiBundle/Resources/public/js/plugins/visualization/echarts/chart/bar.js'
+
+               %}
+                <script src="{{ asset_url }}"></script>
+    
+            {% endjavascripts %}
+
+
+        {% endblock %}
 
     </head>
 
@@ -35,7 +79,7 @@
             {#  Main navbar  #}
             <div class="navbar navbar-inverse bg-indigo">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="index.html"><img src="{{ asset('images/logo_light.png') }}" alt=""></a>
+                    <a class="navbar-brand" href="index.html">{% image '@GoogleAnalyticsApiBundle/Resources/public/images/logo_light.png' %}<img src="{{ asset_url }}" alt="Example" />{% endimage %}</a>
 
                     <ul class="nav navbar-nav pull-right visible-xs-block">
                         <li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
@@ -48,7 +92,8 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown dropdown-user">
                             <a class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="{{ asset('images/placeholder.jpg') }}" alt="">
+                            {% image '@GoogleAnalyticsApiBundle/Resources/public/images/placeholder.jpg' %}
+                            <img src="{{ asset_url }}" alt="" />{% endimage %}       
                                 <span>John Doe</span>
                                 <i class="caret"></i>
                             </a>
@@ -183,42 +228,7 @@
             </footer>
         {% endblock %}
 
-        {% block javascripts %}
-            <!-- Core JS files -->
-
-            <script src="{{ asset('js/plugins/loaders/pace.min.js') }}"></script>
-            <script src="{{ asset('js/core/libraries/jquery.min.js') }}"></script>
-            <script src="{{ asset('js/core/libraries/bootstrap.min.js') }}"></script>
-            <script src="{{ asset('js/plugins/loaders/blockui.min.js') }}"></script>
-            <script src="{{ asset('js/plugins/ui/nicescroll.min.js') }}"></script>
-            <script src="{{ asset('js/plugins/ui/drilldown.js') }}"></script>
-
-            <!-- Core JS files -->
-
-            <!-- Theme JS files -->
-
-            <script src="{{ asset('js/plugins/forms/styling/switchery.min.js') }}"></script>
-            <script src="{{ asset('js/plugins/forms/styling/uniform.min.js') }}"></script>
-            <script src="{{ asset('js/plugins/forms/selects/bootstrap_multiselect.js') }}"></script>
-            <script src="{{ asset('js/plugins/ui/moment/moment.min.js') }}"></script>
-            <script src="{{ asset('js/plugins/pickers/daterangepicker.js') }}"></script>
-            <script src="{{ asset('js/plugins/pickers/anytime.min.js') }}"></script>
-            <script src="{{ asset('js/plugins/pickers/pickadate/picker.js') }}"></script>
-            <script src="{{ asset('js/plugins/pickers/pickadate/picker.date.js') }}"></script>
-            <script src="{{ asset('js/plugins/pickers/pickadate/picker.time.js') }}"></script>
-            <script src="{{ asset('js/plugins/pickers/pickadate/legacy.js') }}"></script>
-            <script src="{{ asset('js/plugins/visualization/echarts/echarts.js') }}"></script>
-            <script src="{{ asset('js/plugins/ui/fab.min.js') }}"></script>
-            <script src="{{ asset('js/plugins/https://www.google.com/jsapi') }}"></script>
-
-            <script src="{{ asset('js/core/app.js') }}"></script>
-            <script src="{{ asset('js/pages/dashboard.js') }}"></script>
-            <script src="{{ asset('js/pages/dashboard_charts.js') }}"></script>
-            <script src="{{ asset('js/plugins/ui/ripple.min.js') }}"></script>
-
-            <!-- /theme JS files -->
-
-        {% endblock %}
+     
 
         {# it's not mandatory to set the timezone in localizeddate(). This is done to
            avoid errors when the 'intl' PHP extension is not available and the application
